@@ -1,0 +1,107 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/all.css' %}">
+    <script>
+//         function getCookie(name) {
+//     var cookieValue = null;
+//     if (document.cookie && document.cookie !== '') {
+//         var cookies = document.cookie.split(';');
+//         for (var i = 0; i < cookies.length; i++) {
+//             var cookie = cookies[i].trim();
+//             // Does this cookie string begin with the name we want?
+//             if (cookie.substring(0, name.length + 1) === (name + '=')) {
+//                 cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+//                 break;
+//             }
+//         }
+//     }
+//     return cookieValue;
+// }
+// var csrftoken = getCookie('csrftoken');
+    </script>
+</head>
+<body>
+    <div class="continer">
+        <div class="nav">
+            <div style="display: flex;">
+                <img src="{% static 'img/user 3.png'%}">
+                <p class="username">{{request.user.username}}</p>
+                <i class="fas fa-ellipsis-v text-white"></i>
+            </div>
+            <div style="text-align: center;">
+                <input type="text" name="search" id="search" placeholder="search">
+            </div>
+        </div>
+        <div class="chatlist">
+			{% for list in rooms  %}
+            <a href="{% url 'room' list.id %}" style="text-decoration:none; color: inherit;">
+                <div class="list">
+                <img src="{% static 'img/user 3.png'%}">
+                <div>
+					{% for i in list.friends.all %}
+						{% if i.user.username != request.user.username %}
+                    		<p class="mess_username">{{i}}</p>
+						{% endif %}
+					{% endfor %}
+					{% if list.lastMessage != Null %}
+                    <p class="lastmassage">
+                        {{ list.lastMessage.user.username }} : {{ list.lastMessage.massage }}
+                    </p>
+					{% endif %}
+                </div>
+                <div class="time">
+                    <p>{{list.lastMessage.data.date}}</p>
+                    <p class="count">
+                        12
+                    </p>
+                </div>
+            </div>
+            </a>
+			{% endfor %}
+        </div>
+    </div>
+    <script>
+        document.getElementById("search").onkeypress = function() {searchUsers(document.getElementById("search").innerHTML)}
+        var i;
+    function searchUsers(name){
+    console.log("this is data");
+    var url = "search/p";
+    fetch(url, {
+        headers:{
+            'content-type': 'application/json',
+            'accept': 'application/json',
+            // 'X-CSRFToken' : csrftoken ,
+        }
+    })
+    .then((response => response.json()))
+    .then((data) => {
+        var newdata;
+        console.log(data);
+        console.log(data['data'][0].username);
+        document.getElementsByClassName("chatlist").innerHTML="";
+        for(i = 0;i < data['data'].length; i++ ){
+            document.getElementsByClassName("chatlist").innerHTML +=`<a href="" style="text-decoration:none; color: inherit;">
+                <div class="list">
+                <img src="{% static 'img/user 3.png'%}">
+                <div>
+                    <p class="mess_username">${data['data'].username}</p>
+                    <p class="lastmassage">
+                        ${data['data'].name}
+                    </p>
+                </div>
+                </div>
+            </a>`
+        }
+    })
+    
+}
+    </script>
+</body>
+</html>

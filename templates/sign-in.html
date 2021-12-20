@@ -1,0 +1,160 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Login V3</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+<link rel="icon" type="image/png" href="{% static 'images/icons/favicon.ico' %}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'fonts/iconic/css/material-design-iconic-font.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/animate/animate.css' %}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/css-hamburgers/hamburgers.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/animsition/css/animsition.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/select2/select2.min.css' %}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/daterangepicker/daterangepicker.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/util.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+<!--===============================================================================================-->
+</head>
+<body>
+
+	<div>
+		{% for message in messages %}
+			<p style="color: black;font-size: 30px;text-align: center;">{{message}}</p>
+		{% endfor %}	
+	</div>
+	
+	<div class="limiter">
+		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
+			<div class="wrap-login100">
+				<form action="/signin" method="post" class="login100-form validate-form">
+					{% csrf_token %}
+					<span class="login100-form-logo">
+						<i class="zmdi zmdi-landscape"></i>
+					</span>
+
+					<span class="login100-form-title p-b-34 p-t-27">
+						Sign-in
+					</span>
+					<div class="wrap-input100 validate-input" data-validate = "Enter username">
+						<input class="input100" type="text" name="username" placeholder="Username">
+						<span class="focus-input100" data-placeholder="&#xf207;"></span>
+						<div id="userNameError" style="color: red;"></div>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate = "Enter username">
+						<input class="input100" type="text" name="first_name" placeholder="Name">
+						<span class="focus-input100" data-placeholder="&#xf207;"></span>
+						<div id="first_nameError" style="color: red;"></div>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Enter password">
+						<input class="input100" type="number" name="number" placeholder="Mobile Number">
+						<span class="focus-input100" data-placeholder="&#xf191;"></span>
+						<div id="numberError" style="color: red;"></div>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Enter password">
+						<input class="input100" type="email" name="email" placeholder="E-mail">
+						<span class="focus-input100" data-placeholder="&#xf191;"></span>
+						<div id="emailError" style="color: red;"></div>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Enter password">
+						<input class="input100" type="password" name="pass" placeholder="Password">
+						<span class="focus-input100" data-placeholder="&#xf191;"></span>
+						<div id="passError" style="color: red;"></div>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Enter password">
+						<input class="input100" type="password" name="repass" placeholder="Conform password">
+						<span class="focus-input100" data-placeholder="&#xf191;"></span>
+						<div id="repassError" style="color: red;"></div>
+					</div>
+
+				
+
+					<div class="container-login100-form-btn" onclick="valadiation()">
+						<button class="login100-form-btn">
+							Continue
+						</button>
+					</div>
+						
+					<!-- <div class="text-center p-t-90">
+						<a class="txt1" href="#">
+							Forgot Password?
+						</a>
+					</div> -->
+				</form>
+			</div>
+		</div>
+	</div>
+	
+
+	<div id="dropDownSelect1"></div>
+	
+<!--===============================================================================================-->
+<script src="{% static 'vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/animsition/js/animsition.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/bootstrap/js/popper.js' %}"></script>
+	<script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/select2/select2.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/daterangepicker/moment.min.js' %}"></script>
+	<script src="{% static 'vendor/daterangepicker/daterangepicker.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/countdowntime/countdowntime.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'js/main.js' %}"></script>
+
+	<script>
+		function valadiation(){
+			var userName=document.querySelector("#username").value;
+			var number=document.querySelector("#number").value;
+			var firstName=document.querySelector("#first_name").value;
+			var email=document.querySelector("#email").value;
+			var password=document.querySelector("#pass").value;
+			var repassword=document.querySelector("#repass").value;
+			if(userName==""){
+				document.querySelector("#userNameError").innerHTML="user-name should not be null";
+			}
+			if(number==""){
+				document.querySelector("#numberError").innerHTML="number should not be null";
+			}	
+			if(firstName==""){
+				document.querySelector("#numberError").innerHTML="user-name should not be null";
+			}
+			if(email==""){
+				document.querySelector("#emailError").innerHTML="user-name should not be null";
+			}
+			if(password==""){
+				document.querySelector("#passError").innerHTML="user-name should not be null";
+			}
+			if(repassword==""){
+				document.querySelector("#repassError").innerHTML="user-name should not be null";
+			}
+			else if(password!=repassword){
+				document.querySelector("#repassError").innerHTML="password should be equal to comform password";
+			}
+
+		}
+		
+	</script>
+
+</body>
+</html>

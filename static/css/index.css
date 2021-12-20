@@ -1,0 +1,108 @@
+*{
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    margin: 0px;
+}
+
+.continer{
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    width: 30%;
+}
+.nav{
+    /* background-color: linear-gradient(#); */
+    background-color: #009688;
+}
+
+.nav img{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    padding: 10px;
+}
+
+.nav p{
+    text-align: center;
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.nav i{
+    position: absolute;
+    right: 0px;
+    padding: 20px;
+    color: white;
+}
+
+#search:focus{
+    outline: none;
+}
+
+#search{
+    width: 90%;
+    height: 30px;
+    margin-bottom: 5px;
+    border-radius: 2rem; 
+    padding-left: 1rem; 
+    border: none;
+}
+ 
+.list{
+    display: flex;
+    border-bottom: 1px solid rgb(219, 203, 203);
+}
+
+.list img{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    padding: 10px;
+}
+
+.list .mess_username{
+    font-weight: 600;
+    margin: 0px;
+    margin-top: 16px;
+}
+
+.list .lastmassage{
+    margin: 0px;
+}
+
+.list .time{
+    position: absolute;
+    right: 0px;
+    padding-right: 5px;
+}
+
+.list:hover{
+    /* box-shadow: 0 -1px 5px rgb(131, 129, 129); */
+    background-color: rgb(233, 232, 232);
+    padding: 3px;
+}
+
+.count{
+    display:  inline-block;
+    text-align: center;
+    padding: .25em .4em;
+    font-size: 75%;
+    font-weight: 700;
+    border-radius: 10rem;
+    color: white;
+    background-color: #28a745;
+}
+
+@media (max-width: 992px){
+    .continer{
+        width: 70%;
+    }
+}
+
+@media (max-width: 576px) {
+    .continer{
+        width: 100%;
+    }
+}
+
+
