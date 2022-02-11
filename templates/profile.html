@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/all.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="profilePhoto">      
+            <div class="backgrond"></div>
+            <div>
+                <img src="{% static 'img/user 3.png' %}" alt="profile photo">
+            </div>
+        </div>
+        <div class="userInfo">
+            <p class="username">{{username}}</p>
+            <p class="name">{{name}}</p>
+        </div>
+        <div class="followersF">
+            <div class="following">
+                <p style="font-weight: 600;text-align: center;">1234</p>
+                <p>following</p>
+            </div>
+            <div class="folowers">
+                <p style="font-weight: 600;text-align: center;">1234</p>
+                <p>followers</p>
+            </div>
+        </div>
+        <div class="bio">
+            <p style="font-weight: 600;text-align: center;font-size: large;">bio</p>
+            <p style="text-align: center;">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat, dignissimos aliquid. Odit, illum, recusandae vitae eius cumque offici</p>
+        </div>
+
+
+        <div class="bottons">
+            <button type="button">Edit profile</button>
+            <a href="{% url 'logout' %}"><button type="button" style="margin-top: 0px;">Logout</button></a>
+        </div>
+
+        <div class="nav_bottom">
+            <a href="{% url 'home' %}"><i id="homePage" class="fa fa-home"></i></a>
+            <a href="{% url 'searchPage' %}"><i  class="fa fa-search search"></i></a>
+            <a href="{% url 'profile' %}"><i id="account" class="fa fa-user"></i></a>
+        </div>
+    </div>
+
+
+    <script>
+        document.querySelector("#homePage").classList.remove("active");
+        document.querySelector(".search").classList.remove("active");
+        document.querySelector("#account").classList.add("active");
+    </script>
+
+
+</body>
+</html>

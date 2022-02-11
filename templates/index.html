@@ -19,7 +19,7 @@
 
 				<!-- Navbar -->
 				<div class="row d-flex flex-row align-items-center p-2" id="navbar">
-					<img alt="Profile Photo" class="img-fluid rounded-circle mr-2" style="height:50px; cursor:pointer;" onclick="showProfileSettings()" id="display-pic">
+					<img alt="Profile Photo" class="img-fluid rounded-circle mr-2" style="height:50px; cursor:pointer;" onclick="showProfileSettings()" id="display-pic" src="{% static 'img/user 3.png' %}">
 					<div class="text-white font-weight-bold" id="username">{{request.user.username}}</div>
 					<div class="nav-item dropdown ml-auto">
 						<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v text-white"></i></a>
@@ -44,7 +44,7 @@
 					{% endif  %}
 					{% for list in rooms  %}
 					<a href="{% url 'room' list.id %}" style="text-decoration:none; color: inherit; width: 100%;"><div class="chat-list-item d-flex flex-row w-100 p-2 border-bottom active">
-						<img src="images/0923102932_aPRkoW.jpg" alt="Profile Photo" class="img-fluid rounded-circle mr-2" style="height:50px;">
+						<img src="{% static 'img/user 3.png' %}" alt="Profile Photo" class="img-fluid rounded-circle mr-2" style="height:50px;">
 						<div class="w-50">
 							{% for i in list.friends.all %}
 								{% if i.user.username != request.user.username %}
@@ -59,8 +59,8 @@
 						</div>
 						<div class="flex-grow-1 text-right">
 							<div class="small time">{{list.lastMessage.data.time}}</div>
-							<div class="badge badge-success badge-pill small d-none" id="unread-count">2</div>
-							<div class="badge badge-success badge-pill small" id="unread-count">100</div>
+							<!-- <div class="badge badge-success badge-pill small d-none" id="unread-count">2</div>
+							<div class="badge badge-success badge-pill small" id="unread-count">100</div> -->
 						</div>
 					</div></a>
 					{% endfor %}
@@ -73,7 +73,7 @@
 						<div class="text-white font-weight-bold">Profile</div>
 					</div>
 					<div class="d-flex flex-column" style="overflow:auto;">
-						<img alt="Profile Photo" class="img-fluid rounded-circle my-5 justify-self-center mx-auto" id="profile-pic">
+						<img alt="Profile Photo" class="img-fluid rounded-circle my-5 justify-self-center mx-auto" id="profile-pic" src="{% static 'img/user 3.png' %}">
 						<input type="file" id="profile-pic-input" class="d-none">
 						<div class="bg-white px-3 py-2">
 							<div class="text-muted mb-2"><label for="input-name">Your Name</label></div>
@@ -100,7 +100,7 @@
 					<div class="d-block d-sm-none">
 						<i class="fas fa-arrow-left p-2 mr-2 text-white" style="font-size: 1.5rem; cursor: pointer;" onclick="showChatList()"></i>
 					</div>
-					<a href="#"><img src="images/0923102932_aPRkoW.jpg" alt="Profile Photo" class="img-fluid rounded-circle mr-2" style="height:50px;" id="pic"></a>
+					<a href="#"><img src="{% static 'img/user 3.png' %}" alt="Profile Photo" class="img-fluid rounded-circle mr-2" style="height:50px;" id="pic"></a>
 					<div class="d-flex flex-column">
 						<div class="text-white font-weight-bold" id="name"></div>
 						<div class="text-white small" id="details">You, Nitin, Suvro Mobile</div>
@@ -114,37 +114,6 @@
 
 				<!-- Messages -->
 				<div class="d-flex flex-column" id="messages">
-					<div class="mx-auto my-2 bg-primary text-white small py-1 px-2 rounded">
-						25/03/2018
-					</div>
-					
-					<div class="align-self-start p-1 my-1 mx-3 rounded bg-white shadow-sm message-item">
-						<div class="options">
-							<a href="#"><i class="fas fa-angle-down text-muted px-2"></i></a>
-						</div>
-						
-						<div class="d-flex flex-row">
-							<div class="body m-1 mr-2">where are you, buddy?</div>
-							<div class="time ml-auto small text-right flex-shrink-0 align-self-end text-muted" style="width:75px;">
-								13:21
-								
-							</div>
-						</div>
-					</div>
-					
-					<div class="align-self-end self p-1 my-1 mx-3 rounded bg-white shadow-sm message-item">
-						<div class="options">
-							<a href="#"><i class="fas fa-angle-down text-muted px-2"></i></a>
-						</div>
-						
-						<div class="d-flex flex-row">
-							<div class="body m-1 mr-2">at home</div>
-							<div class="time ml-auto small text-right flex-shrink-0 align-self-end text-muted" style="width:75px;">
-								13:22
-								<i class="fas fa-check-circle"></i>
-							</div>
-						</div>
-					</div>
 				</div>
 
 
@@ -237,6 +206,7 @@ var roomName = {{roomid}};
 							</div>
 						</div>
 					</div>`
+					document.querySelector('#messages').scrollTop = document.querySelector('#messages').scrollHeight;
 			}
 			else{
 				document.querySelector('#messages').innerHTML +=`<div class="align-self-end self p-1 my-1 mx-3 rounded bg-white shadow-sm message-item">
@@ -252,6 +222,7 @@ var roomName = {{roomid}};
 							</div>
 						</div>
 					</div>`
+					document.querySelector('#messages').scrollTop = document.querySelector('#messages').scrollHeight;
 			}
 			
 		}

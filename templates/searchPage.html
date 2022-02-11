@@ -3,29 +3,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>search page</title>
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
     <link rel="stylesheet" href="{% static 'css/all.css' %}">
-    <script>
-//         function getCookie(name) {
-//     var cookieValue = null;
-//     if (document.cookie && document.cookie !== '') {
-//         var cookies = document.cookie.split(';');
-//         for (var i = 0; i < cookies.length; i++) {
-//             var cookie = cookies[i].trim();
-//             // Does this cookie string begin with the name we want?
-//             if (cookie.substring(0, name.length + 1) === (name + '=')) {
-//                 cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-//                 break;
-//             }
-//         }
-//     }
-//     return cookieValue;
-// }
-// var csrftoken = getCookie('csrftoken');
-    </script>
 </head>
 <body>
     <div class="continer">
@@ -36,51 +17,26 @@
                 <i class="fas fa-ellipsis-v text-white"></i>
             </div>
             <div style="text-align: center;">
-                <input type="text" name="search" id="search" placeholder="search">
+                <input type="text" name="search" id="search" placeholder="discover ur friends">
             </div>
         </div>
-        <div class="chatlist">
-			{% for list in rooms  %}
-            <a href="{% url 'room' list.id %}" style="text-decoration:none; color: inherit;">
-                <div class="list">
-                <img src="{% static 'img/user 3.png'%}">
-                <div>
-					{% for i in list.friends.all %}
-						{% if i.user.username != request.user.username %}
-                    		<p class="mess_username">{{i}}</p>
-						{% endif %}
-					{% endfor %}
-					{% if list.lastMessage != Null %}
-                    <p class="lastmassage">
-                        {{ list.lastMessage.user.username }} : {{ list.lastMessage.massage }}
-                    </p>
-					{% endif %}
-                </div>
-                <div class="time">
-                    <p>{{list.lastMessage.data.date}}</p>
-                    <!-- <p class="count">
-                        12
-                    </p> -->
-                </div>
-            </div>
-            </a>
-			{% endfor %}
-        </div>
+        <div class="chatlist"></div>
         <div class="nav_bottom">
             <a href="{% url 'home' %}"><i id="homePage" class="fa fa-home"></i></a>
             <a href="{% url 'searchPage' %}"><i  class="fa fa-search search"></i></a>
             <a href="{% url 'profile' %}"><i id="account" class="fa fa-user"></i></a>
         </div>
     </div>
-    
+
     <script>
-        var input = document.querySelector("#search");
-        document.querySelector(".search").classList.remove("active");
         document.querySelector("#account").classList.remove("active");
-        document.querySelector("#homePage").classList.add("active");
+        document.querySelector("#homePage").classList.remove("active");
+        document.querySelector(".search").classList.add("active");
+       
         document.getElementById("search").onkeyup = function() {searchUsers(document.querySelector("#search").value)}
-        var i;
-    function searchUsers(name){
+
+        function searchUsers(name){
+            document.querySelector(".chatlist").innerHTML="<div></div>"
         if( name.length>0){  
     var url = 'search/'+ name;
     fetch(url, {
@@ -101,10 +57,8 @@
         }
     })
     }
-    
     }
     function createUsers(data){
-        document.querySelector(".chatlist").innerHTML=" ";
         console.log(data['data'].length)
         for(i = 0;i <data['data'].length; i++ ){
             document.querySelector(".chatlist").innerHTML +=`<a href="" style="text-decoration:none; color: inherit;">
@@ -118,8 +72,7 @@
             </a>`
         }
     }
-
-
     </script>
+
 </body>
 </html>
